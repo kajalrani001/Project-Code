@@ -1,0 +1,180 @@
+#BUSINESS LOGIC LAYER(BLL)
+
+#Class Product Code:
+class Product:
+    listProduct = []
+
+#Initializing the variables:
+    def __init__(self):
+        self.product_id=0
+        self.product_name=''
+        self.product_brand=''
+        self.product_color=''
+        self.product_price=0
+        self.product_category =''
+        self.product_avail=False
+
+#Add Product
+    def addProduct(self):
+        Product.listProduct.append(self)
+
+#Search Any Product
+    def searchProduct(self):
+        for e in Product.listProduct:
+            if((e.product_id==self.product_id)or(e.product_name==self.product_name)):
+                self.product_id=e.product_id
+                self.product_name=e.product_name
+                self.product_brand=e.product_brand
+                self.product_color=e.product_color
+                self.product_price=e.product_price
+                self.product_category=e.product_category
+                self.product_avail=e.product_avail
+                return
+        print('Product Not found')
+
+#Modify Product
+    def modifyProduct(self):
+        for e in Product.listProduct:
+            if((e.product_id==self.product_id)or(e.product_name==self.product_name)):
+                e.product_id=self.product_id
+                e.product_name=self.product_name
+                e.product_brand=self.product_brand
+                e.product_color=self.product_color
+                e.product_price=self.product_price
+                e.product_category=self.product_category
+                e.product_avail=self.product_avail
+                return
+        print('Product Not found')
+
+#Delete Product
+    def deleteProduct(self):
+        for e in Product.listProduct:
+            if((e.product_id==self.product_id)or(e.product_name==self.product_name)):
+                Product.listProduct.remove(e)
+                return
+        print('Product Not Found')
+
+    def showAllProducts(self):
+        for e in Product.listProduct:
+            print('Product ID:',e.product_id,' Product Name:',e.product_name,' Product Category',e.product_category,' Product Brand:',e.product_category,'Product Colour:',e.product_color,'Product Price:',e.product_price,'Product Available',e.product_avail)
+
+
+
+#PRESENTATION LAYER
+
+
+#Loop of Operations on Product:
+while(True):
+    print('1.Add Product\n2.Search Product\n3.Modify Product\n4.Delete Product\n5.Show All Products')
+    ch=input('Enter your Choice:')
+
+#Add Product if choice is 1:
+    if(ch=='1'):
+        prod=Product()
+        prod.product_category=input('Enter the Category:')
+        prod.product_id=int(input('Enter Product ID:'))
+        prod.product_name=input('Enter Product Name:')
+        prod.product_brand=input('Enter Product Brand:')
+        prod.product_color=input('Enter Product Colour:')
+        prod.product_price=int(input('Enter Product Price:'))
+        prod.product_avail=True
+        prod.addProduct()
+        print('Product Added Successfully\n')
+
+#Search Product if choice is 2:
+    elif(ch=='2'):
+        while(True):
+            print('Search By -\n1.ID\n2.Name')
+            s_ch=input('Enter choice:')
+            prod=Product()
+        #Search By PRODUCT ID:
+            if(s_ch=='1'):
+                prod.product_id=int(input('Enter ID: '))
+                prod.searchProduct()
+                pass
+        #Search by PRODUCT NAME:
+            elif(s_ch=='2'):
+                prod.product_name=input('enter product name: ')
+                prod.searchProduct()
+                pass
+        #WRONG choice :Loop Out
+            else:
+                print('Wrong Choice!! Try Again\n')
+                break
+        #Print the Product Details:
+            print('ID:',prod.product_id,'Product Name:',prod.product_name,'Product brand:',prod.product_brand,'Product Color:',prod.product_color,'Product Price:',prod.product_price,'Available:',prod.product_avail)
+        pass
+
+#Modify the Product:
+    elif (ch == '3'):
+        while (True):
+            print('Modify By -\n1.ID\n2.Name')
+            s_ch = input('Enter choice:')
+            prod = Product()
+        #Modify By PRODUCT ID:
+            if (s_ch == '1'):
+                prod.product_id = int(input('Enter ID: '))
+                prod.product_category = input('Enter the Category:')
+                prod.product_name = input('Enter Product Name:')
+                prod.product_brand = input('Enter Product Brand:')
+                prod.product_color = input('Enter Product Colour:')
+                prod.product_price = int(input('Enter Product Price:'))
+                prod.product_avail = input('Type True or False : ' )
+                prod.modifyProduct()
+                pass
+        #Modify By PRODUCT NAME:
+            elif (s_ch == '2'):
+                prod.product_name = input('enter product name: ')
+                prod.product_category = input('Enter the Category:')
+                prod.product_id = int(input('Enter Product ID:'))
+                prod.product_brand = input('Enter Product Brand:')
+                prod.product_color = input('Enter Product Colour:')
+                prod.product_price = int(input('Enter Product Price:'))
+                prod.product_avail = input('Type True or False : ' )
+                prod.modifyProduct()
+                pass
+        #WRONG CHOICE: Loop Out
+            else:
+                print('Wrong Choice!! Try Again')
+                break
+
+        #PRINT the modified Details:
+            print('ID:', prod.product_id, 'Product Name:', prod.product_name, 'Product brand:', prod.product_brand,
+                  'Product Color:', prod.product_color, 'Product Price:', prod.product_price, 'Available:',
+                  prod.product_avail)
+        pass
+
+#DELETE the Product:
+    elif (ch == '4'):
+        while (True):
+            print('Delete By -\n1.ID\n2.Name')
+            s_ch = input('Enter choice:')
+            prod = Product()
+        #Delete by PRODUCT ID:
+            if (s_ch == '1'):
+                prod.product_id = int(input('Enter ID: '))
+                prod.deleteProduct()
+                pass
+        #Delete By PRODUCT NAME:
+            elif (s_ch == '2'):
+                prod.product_name = input('enter product name: ')
+                prod.deleteProduct()
+                pass
+        #WRONG CHOICE: Loop Out
+            else:
+                print('Wrong Choice!! Try Again\n')
+                break
+            print('Product Deleted Successfully' )
+        pass
+
+#SHOW ALL PRODUCTS :
+    elif(ch=='5'):
+        prod=Product()
+        print('\n The Products are shown as:-')
+        prod.showAllProducts()
+        print()
+
+#WRONG CHOICE: CLOSE LOOP
+    else:
+        break
+
